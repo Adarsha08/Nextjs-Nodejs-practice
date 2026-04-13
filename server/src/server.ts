@@ -2,9 +2,18 @@
 import express from 'express'
 import cors from 'cors'
 import jobRoute from './routes/jobRoute'
+import signUp from './routes/signupRoute'
+import cookieParser from 'cookie-parser'
+import { Request,Response,NextFunction } from 'express'
 const app = express()
-app.use(cors())
+app.use(cors(
+  {origin:'http://localhost:3000',credentials:true}
+  
+))
 app.use(express.json())
+
+
+app.use(cookieParser())
 
 app.get('/', (req, res) => {
   
@@ -13,8 +22,12 @@ app.get('/', (req, res) => {
 
 //if the api is called in the api/note then send it to the routes /jobRoutes  
 app.use('/api/job',jobRoute)
+app.use('/api/auth',signUp,)
 
-
+// global error handler goes here
+app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+  res.status(err.status || 500).json({ message: err.message || 'Something went wrong' })
+})
 app.listen(5000, () => {
   console.log('Server running on port 5000')
 })
