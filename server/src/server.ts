@@ -4,7 +4,9 @@ import cors from 'cors'
 import jobRoute from './routes/jobRoute'
 import signUp from './routes/signupRoute'
 import cookieParser from 'cookie-parser'
+import productReviewRoute from './routes/productReviewRoute'
 import { Request,Response,NextFunction } from 'express'
+import  addProductRoute  from './routes/addProductRoute'
 const app = express()
 app.use(cors(
   {origin:'http://localhost:3000',credentials:true}
@@ -23,6 +25,8 @@ app.get('/', (req, res) => {
 //if the api is called in the api/note then send it to the routes /jobRoutes  
 app.use('/api/job',jobRoute)
 app.use('/api/auth',signUp,)
+app.use('/product/review',productReviewRoute)
+app.use('/api/addProduct',addProductRoute)
 
 // global error handler goes here
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
