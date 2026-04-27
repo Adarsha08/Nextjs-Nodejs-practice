@@ -7,7 +7,7 @@ export const refreshToken = async (req: Request, res: Response) => {
     //the cookies is alrady set in the broswer when the user login and it alrady has the data
     const token = req.cookies.refreshToken;
     if (!token) {
-      return res.json({ message: "Invalid Token " });
+      return res.status(401).json({ message: "Invalid Token " });
     }
     // decode the refresh token and took the id 
     const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET!) as {

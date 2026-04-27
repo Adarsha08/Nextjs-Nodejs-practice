@@ -13,7 +13,7 @@ export const fetchWithAuth = async (url: string, options: RequestInit = {}) => {
     ...options, //here the option is here to define the method and body part of the request
     headers: {
       ...options.headers,
-      Authorization: `Bearer${accessToken}`,
+      Authorization: `Bearer ${accessToken}`,
     },
     credentials: "include",
   });
